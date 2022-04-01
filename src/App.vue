@@ -6,45 +6,55 @@
     </button>
   </div>
   <div class="container" v-if="isConnected">
-    <h3>Wallet Address : {{ selectedAccount }}</h3>
-    <button class="button">Open Widget</button>
+    <!-- <h3>Wallet Address : {{ selectedAccount }}</h3> -->
+    <button id="#btnMaticWidget" @click="showWidget" class="button">
+      Open Widget
+    </button>
   </div>
 </template>
 
 <script>
 import Web3 from "web3/dist/web3.min.js";
 import Web3Modal from "web3modal";
+import { widget } from "./index";
+
 export default {
   name: "App",
   data() {
     return {
       isConnected: false,
-      selectedAccount: null,
+      // selectedAccount: null,
     };
   },
-   methods: {
+  methods: {
     //Login method
     async connectToMeta() {
       if (typeof window.ethereum !== "undefined") {
         // MetaMask is installed
         try {
-            const web3Modal = new Web3Modal({
-            // network: "mainnet", // optional
-            // cacheProvider: true, // optional
+          const web3Modal = new Web3Modal({
+            // network: "testnet", // optional
+            cacheProvider: true, // optional
             providerOptions: {}, // required
           });
           const provider = await web3Modal.connect();
           const web3 = new Web3(provider);
           console.log(web3);
           this.isConnected = true;
-          this.selectedAccount = "demo";
-      } catch (err) {
+          // this.selectedAccount = "demo";
+          console.log("widget created");
+          await widget.create();
+          
+        } catch (err) {
           // User denied access
           console.error("Error while connecting to Metamask");
         }
       } else {
         alert("Unable to detect MetaMask");
       }
+    },
+    async showWidget() {
+      widget.show();
     },
   },
 };
