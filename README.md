@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+# get_meta_balance
+
+>>>>>>> 8f2a4f5ea07c715d6d353b3c6e0437052660830f
 ## Project setup
 ```
 npm install
