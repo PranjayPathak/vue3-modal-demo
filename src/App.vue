@@ -7,7 +7,10 @@
   </div>
   <div class="container" v-if="isConnected">
     <!-- <h3>Wallet Address : {{ selectedAccount }}</h3> -->
-    <button id="#btnMaticWidget" @click="showWidget" class="button">
+    <button id="#btnMaticWidget" 
+    @click="showWidget" 
+    class="button"
+    >
       Open Widget
     </button>
   </div>
@@ -16,7 +19,7 @@
 <script>
 import Web3 from "web3/dist/web3.min.js";
 import Web3Modal from "web3modal";
-import { widget } from "./index";
+import { widget } from "./constants/index";
 
 export default {
   name: "App",
