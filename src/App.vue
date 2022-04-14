@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       isConnected: false,
+      provider:null
       // selectedAccount: null,
     };
   },
@@ -41,13 +42,15 @@ export default {
             providerOptions: {}, // required
           });
           const provider = await web3Modal.connect();
+          this.provider = provider;
           const web3 = new Web3(provider);
-          console.log(web3);
+          console.log(provider);
           this.isConnected = true;
           // this.selectedAccount = "demo";
           console.log("widget created");
           await widget.create();
-          
+          // console.log("provider", provider); 
+          widget.setCustomProvider(provider);          
         } catch (err) {
           // User denied access
           console.error("Error while connecting to Metamask");
